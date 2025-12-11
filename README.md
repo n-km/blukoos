@@ -86,7 +86,7 @@ make run → boot in QEMU
 
 #### Branching
 
-**USE KEYWORDS!**
+*USE KEYWORDS!*
 
 ```sh
 2025-12-11_create:theme;
@@ -94,7 +94,7 @@ make run → boot in QEMU
 
 #### Committing
 
-**USE KEYWORDS!**
+*USE KEYWORDS!*
 
 ```sh
 file: added header, deleted footer, added rules;
