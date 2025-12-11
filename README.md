@@ -1,5 +1,5 @@
 # blukoos
-An brand new operating system based on an existing bootloader
+An brand new operating system built on an existing bootloader
 
 ## Ordner-Structure:
 
