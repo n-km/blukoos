@@ -80,7 +80,7 @@ make run → boot in QEMU
 
 </details>
 
-## Constribute
+## Contribute
 
 ### Rules
 
