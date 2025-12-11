@@ -24,7 +24,7 @@ blukoos/
 ### Sprint Objectives:
 #### 1. Project Setup & Repository Initialization
 
-- [ ] Create the main project repository structure (boot/, kernel/, build/, docs/).
+- [x] Create the main project repository structure (boot/, kernel/, build/, docs/).
 - [ ] Add initial README, license, and contribution guidelines.
 - [ ] Set up build system (Makefile or alternative).
 
