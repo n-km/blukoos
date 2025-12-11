@@ -16,6 +16,19 @@ static inline uint16_t vga_entry(char c, uint8_t color) {
     return (uint16_t) c | (uint16_t) color << 8;
 }
 
+static void terminal_initialize(void) {
+    terminal_row = 0;
+    terminal_column = 0;
+    terminal_color = 0x0F;
+
+    for (size_t y = 0; y < VGA_HEIGHT; y++) {
+        for (size_t x = 0; x < VGA_WIDTH; x++) {
+            const size_t index = y * VGA_WIDTH + x;
+            terminal_buffer[index] = vga_entry(' ', terminal_color);
+        }
+    }
+}
+
 void terminal_putchar(char c) {
     if (c == '\n') {
         terminal_column = 0;
@@ -36,6 +49,8 @@ void terminal_writestring(const char* str) {
 
 /* Kernel-Hauptfunktion */
 void kernel_main(void) {
+    terminal_initialize();
+
     terminal_writestring("Hello, Kernel World!\n");
     terminal_writestring("This is a minimal OS.\n");
 }
