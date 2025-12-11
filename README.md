@@ -18,8 +18,8 @@ blukoos/
   <summary><h2>Sprint 1 – Core Boot & Kernel Initialization</h2></summary>
 
 
-Duration: 2 weeks
-Goal: Establish the foundational structure of the blukoos operating system and ensure it can successfully boot through an existing bootloader.
+- Duration: 2 weeks
+- Goal: Establish the foundational structure of the blukoos operating system and ensure it can successfully boot through an existing bootloader.
 
 ### Sprint Objectives:
 #### 1. Project Setup & Repository Initialization
