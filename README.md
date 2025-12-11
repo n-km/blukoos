@@ -79,3 +79,24 @@ make run → boot in QEMU
 
 
 </details>
+
+## Constribute
+
+### Rules
+
+#### Branching
+
+**USE KEYWORDS!**
+
+```sh
+2025-12-11_create:theme;
+```
+
+#### Committing
+
+**USE KEYWORDS!**
+
+```sh
+file: added header, deleted footer, added rules;
+added: file;
+```
