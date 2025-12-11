@@ -1,0 +1,11 @@
+# Build artifacts
+kernel/*.o
+kernel.bin
+*.iso
+iso/
+
+# Misc editor/OS stuff (optional but nice)
+.vscode/
+*.swp
+*~
+.DS_Store
