@@ -1,4 +1,4 @@
-#include "vga.h"
+#include "drivers/video/vga.h"
 
 void kernel_main() {
   vga_clear_screen();
