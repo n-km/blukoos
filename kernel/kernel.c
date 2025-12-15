@@ -1,56 +1,43 @@
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
+#include "vga.h"
 
-/* VGA-Treiber (Textmodus, 0xB8000) */
-#define VGA_WIDTH  80
-#define VGA_HEIGHT 25
-#define VGA_MEMORY 0xB8000
-
-static uint16_t* terminal_buffer = (uint16_t*) VGA_MEMORY;
-static size_t terminal_row = 0;
-static size_t terminal_column = 0;
-static uint8_t terminal_color = 0x0F;  // Weiß auf Schwarz
-
-static inline uint16_t vga_entry(char c, uint8_t color) {
-    return (uint16_t) c | (uint16_t) color << 8;
-}
-
-static void terminal_initialize(void) {
-    terminal_row = 0;
-    terminal_column = 0;
-    terminal_color = 0x0F;
-
-    for (size_t y = 0; y < VGA_HEIGHT; y++) {
-        for (size_t x = 0; x < VGA_WIDTH; x++) {
-            const size_t index = y * VGA_WIDTH + x;
-            terminal_buffer[index] = vga_entry(' ', terminal_color);
-        }
-    }
-}
-
-void terminal_putchar(char c) {
-    if (c == '\n') {
-        terminal_column = 0;
-        terminal_row++;
-        return;
-    }
-    const size_t index = terminal_row * VGA_WIDTH + terminal_column;
-    terminal_buffer[index] = vga_entry(c, terminal_color);
-    if (++terminal_column == VGA_WIDTH) {
-        terminal_column = 0;
-        terminal_row++;
-    }
-}
-
-void terminal_writestring(const char* str) {
-    while (*str) terminal_putchar(*str++);
-}
-
-/* Kernel-Hauptfunktion */
-void kernel_main(void) {
-    terminal_initialize();
-
-    terminal_writestring("Hello, Kernel World!\n");
-    terminal_writestring("This is a minimal OS.\n");
+void kernel_main() {
+  vga_clear_screen();
+  vga_write_line("1");
+  vga_write_line("2");
+  vga_write_line("3");
+  vga_write_line("4");
+  vga_write_line("5");
+  vga_write_line("6");
+  vga_write_line("7");
+  vga_write_line("8");
+  vga_write_line("9");
+  vga_write_line("10");
+  vga_write_line("11");
+  vga_write_line("12");
+  vga_write_line("13");
+  vga_write_line("14");
+  vga_write_line("15");
+  vga_write_line("16");
+  vga_write_line("17");
+  vga_write_line("18");
+  vga_write_line("19");
+  vga_write_line("20");
+  vga_write_line("21");
+  vga_write_line("22");
+  vga_write_line("23");
+  vga_write_line("24");
+  vga_write_line("25");
+  vga_write_line("26");
+  vga_write_line("27");
+  vga_write_line("28");
+  vga_write_line("29");
+  vga_write_line("30");
+  vga_write_line("31");
+  vga_write_line("32");
+  vga_write_line("33");
+  vga_write_line("34");
+  vga_write_line("35");
+  vga_write_line("36");
+  vga_write_line("37");
+  vga_write_line("38");
 }
