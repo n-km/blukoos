@@ -1,7 +1,8 @@
 #include "drivers/video/vga.h"
+#include "drivers/input/input.h"
 
-void kernel_main() {
-  vga_clear_screen();
+static void scroll_test(void)
+{
   vga_write_line("1");
   vga_write_line("2");
   vga_write_line("3");
@@ -40,4 +41,18 @@ void kernel_main() {
   vga_write_line("36");
   vga_write_line("37");
   vga_write_line("38");
+}
+
+void input_test(void)
+{
+  vga_write("> ");
+  while (1)
+    keyboard_poll_and_print();
+}
+
+void kernel_main()
+{
+  vga_clear_screen();
+
+  input_test();
 }
