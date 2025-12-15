@@ -1,2 +1,0 @@
-Later to be turned into `io.h` file;
-only when we add next device (keyboard/PIC) and want reuse of port_byte_in/port_byte_out in drivers/video/vga.c
