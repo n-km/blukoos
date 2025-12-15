@@ -76,7 +76,8 @@ make run → boot in QEMU
 | [https://medium.com/@jothini231/build-a-simple-bootloader-and-kernel-from-scratch-using-nasm-and-qemu-e4699f6252a9](https://medium.com/@jothini231/build-a-simple-bootloader-and-kernel-from-scratch-using-nasm-and-qemu-e4699f6252a9) | Shows how a simple NASM bootloader works and how it hands off to a C kernel.                                               |
 | **Article: “Writing an OS Kernel Using a Tutorial from OSDev.org”**                                                                                                                                                                    |                                                                                                                            |
 | [https://coobird.net/blog/2022/04/23/writing-an-os-kernel-using-a-tutorial-from-osdev.html](https://coobird.net/blog/2022/04/23/writing-an-os-kernel-using-a-tutorial-from-osdev.html)                                                 | A real-world experience report from following OSDev’s tutorials — good for avoiding common pitfalls.                       |
-
+| **Article: Writing own VGA-Driver**																																																																					|																																									|																																									|
+| [https://dev.to/frosnerd/writing-my-own-vga-driver-22nn](https://dev.to/frosnerd/writing-my-own-vga-driver-22nn)												|																																					|																																													|
 
 </details>
 
