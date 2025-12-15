@@ -1,10 +1,15 @@
-# Build artifacts
-kernel/*.o
-kernel.bin
+# === Build artifacts ===
+*.o
+*.a
+*.elf
+*.bin
 *.iso
+
+# Build / output directories
+build/
 iso/
 
-# Misc editor/OS stuff (optional but nice)
+# === Editor / OS noise ===
 .vscode/
 *.swp
 *~
