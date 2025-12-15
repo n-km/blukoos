@@ -81,23 +81,90 @@ make run → boot in QEMU
 
 </details>
 
-## Contribute
+### Contributing & Workflow
 
-### Rules
+#### Issues
+
+All non-trivial changes should be tracked via a GitHub Issue.
+
+**Issue title format:**
+
+```
+[type] Short descriptive title
+```
+
+**Examples:**
+
+* `[refactor] Split VGA into driver and reorganize arch/x86 files`
+* `[feature] Add basic keyboard input handling`
+* `[build] Introduce ISO build target`
+
+**Common issue types:**
+
+* `feature` – new functionality
+* `fix` – bug fixes
+* `refactor` – code restructuring without new behavior
+* `chore` – maintenance, cleanup, tooling
+* `docs` – documentation changes
+
+---
 
 #### Branching
 
-*USE KEYWORDS!*
+Branches must be created **per issue** and include the issue number.
 
-```sh
-2025-12-11_create:theme;
+**Branch naming format:**
+
 ```
+issue-<number>/<short-description>
+```
+
+**Examples:**
+
+```
+issue-1/vga-driver-and-arch-layout
+issue-12/idt-initialization
+issue-24/makefile-cleanup
+```
+
+Notes:
+
+* The issue number is mandatory
+* The description should be short and kebab-case
+* Branch names do not need to exactly match the issue title
+
+---
 
 #### Committing
 
-*USE KEYWORDS!*
+Commit messages must reference the related issue number to enable GitHub linking.
 
-```sh
-file: added header, deleted footer, added rules;
-added: file;
+**Recommended commit format:**
+
+```
+<type>(<scope>): short description (#<issue>)
+```
+
+**Examples:**
+
+```
+refactor(drivers): extract VGA text-mode driver (#1)
+chore(structure): move boot code to arch/x86 (#1)
+build: update Makefile for new directory layout (#1)
+```
+
+**Common commit types:**
+
+* `feat` – new features
+* `fix` – bug fixes
+* `refactor` – restructuring
+* `chore` – tooling / cleanup
+* `docs` – documentation
+
+To automatically close an issue when merging, include one of the following in the **final commit or PR title**:
+
+```
+Fixes #<issue>
+Closes #<issue>
+Resolves #<issue>
 ```
