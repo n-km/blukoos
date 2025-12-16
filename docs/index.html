@@ -33,23 +33,58 @@
     </div>
     <div class="menu-backpanel" id="backpanel" onclick="closeMenu()"></div>
     <main>
-        <section class="banner">
-            <h2>Getting Started</h2>
-            <p>Install the Repository and set up BlukoOS on your device.</p>
-            <h4>Clone the Repository from GitHub</h4>
-            <button id="repoLink" onclick="copyToClipboard()">
-                git clone https://github.com/n-km/blukoos.git
-            </button>
-        </section>
-        <section>
-            <h2>User Guide</h2>
-            <p>Explore the features and functionalities of BlukoOS.</p>
-        </section>
-        <section>
-            <h2>Developer Resources</h2>
-            <p>Find information for developers looking to contribute to BlukoOS.</p>
-        </section>
-    </main>
+    <section class="banner">
+        <h2>🚀 Getting Started</h2>
+        <p>Install the Repository and set up <b>BlukoOS</b> on your device.</p>
+        <h4>Clone the Repository from GitHub</h4>
+        <button id="repoLink" onclick="copyToClipboard()">
+            git clone https://github.com/n-km/blukoos.git
+        </button>
+        <p class="note"><b>Note:</b> Building BlukoOS requires a GNU/Linux environment with standard development tools (GCC, binutils, grub-mkrescue, QEMU).</p>
+    </section>
+
+    <section class="progress">
+        <h2>🛠️ Current Development Progress</h2>
+        <p>We've successfully established the foundational build system for BlukoOS, achieving the following key milestones:</p>
+        
+        <div class="progress-details">
+            <h3>Build System & Toolchain</h3>
+            <ul>
+                <li><strong>Target Architecture:</strong> The kernel is compiled for the <b>32-bit x86 architecture</b> (`-m32 -m elf_i386`), ensuring compatibility with older and virtualized hardware.</li>
+                <li><strong>Development Environment:</strong> We utilize <b>GCC</b> as both the C compiler and assembler, with specific flags like <code>-ffreestanding</code> and <code>-nostdlib</code> to create an independent, bare-metal operating system kernel.</li>
+                <li><strong>Bootloader Integration:</strong> The system is set up to be booted by the <b>GRUB Multiboot bootloader</b>. We generate a bootable ISO file using <code>grub-mkrescue</code>.</li>
+            </ul>
+        </div>
+
+        <div class="progress-details">
+            <h3>Initial Kernel Components</h3>
+            <p>The kernel's current structure includes foundational modules necessary for basic operation:</p>
+            <ul>
+                <li><strong>Core Kernel:</strong> <code>kernel/kernel.c</code> serves as the main entry point for the OS.</li>
+                <li><strong>VGA Driver:</strong> <code>kernel/drivers/video/vga.c</code> for text-mode output to the screen. </li>
+                <li><strong>Keyboard Driver:</strong> <code>kernel/drivers/input/keyboard.c</code> for handling user input.</li>
+                <li><strong>Console Management:</strong> <code>kernel/console/console.c</code> for abstracting screen output and input handling.</li>
+            </ul>
+        </div>
+        
+        <div class="progress-details">
+            <h3>Execution & Testing</h3>
+            <ul>
+                <li><strong>Virtualization:</strong> We use <b>QEMU</b> (`qemu-system-i386`) to reliably test and run the generated bootable ISO in a controlled virtual environment.</li>
+                <li><strong>Build Commands:</strong> The <b>Makefile</b> provides clear commands for building (<code>make all</code>), running (<code>make run</code>), and cleaning the project (<code>make clean</code>).</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>📚 User Guide</h2>
+        <p>Explore the features and functionalities of BlukoOS.</p>
+    </section>
+    <section>
+        <h2>🧑‍💻 Developer Resources</h2>
+        <p>Find information for developers looking to contribute to BlukoOS.</p>
+    </section>
+</main>
     <footer>
         <p>&copy; 2025 BlukoOS. All rights reserved.</p>
     </footer>

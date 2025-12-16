@@ -67,6 +67,22 @@ main .banner {
     align-items: center;
     text-align: center;
 }
+main section {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 20px;
+    margin: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+main section ul {
+    margin-left: 20px;
+    margin-top: 10px;
+    list-style-type: disc;
+}
+main section ul li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
 
 /* GLOBAL STYLES - FOOTER */
 footer {
@@ -119,6 +135,7 @@ h6 {
     display: inline-block;
     /* Wichtig für Breite und Padding bei Links */
     width: max-content;
+    max-width: 100%;
     padding: 12px 20px;
     /* Leicht mehr vertikales Padding */
     margin: 10px;
