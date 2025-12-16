@@ -10,6 +10,7 @@
     margin: 0;
     padding: 0;
 }
+
 *::selection {
     background-color: #e69808;
     color: #333;
@@ -23,7 +24,6 @@ html {
 /* GLOBAL STYLES - BODY */
 body {
     font-family: 'Montserrat', sans-serif;
-    letter-spacing: 2px;
     background-color: #333;
     color: #f4f4f4;
     height: 200vh;
@@ -46,13 +46,26 @@ header {
     border: 1px solid rgba(255, 255, 255, 0.3);
     background-color: rgba(255, 255, 255, 0.15);
 }
+
 header nav {
     display: none;
 }
 
 /* GLOBAL STYLES - MAIN */
 main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 20px;
+}
+
+main .banner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
 }
 
 /* GLOBAL STYLES - FOOTER */
@@ -67,26 +80,75 @@ footer {
 }
 
 /* GLOBAL STYLES - HEADER */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 500;
 }
+
 h1 {
     font-size: 2.2rem;
 }
+
 h2 {
     font-size: 1.8rem;
 }
+
 h3 {
     font-size: 1.8rem;
 }
+
 h4 {
     font-size: 1.5rem;
 }
+
 h5 {
     font-size: 1.25rem;
 }
+
 h6 {
     font-size: 1rem;
+}
+
+/* GLOBAL STYLES - LINKS */
+#repoLink {
+    /* Layout und Größe */
+    display: inline-block;
+    /* Wichtig für Breite und Padding bei Links */
+    width: max-content;
+    padding: 12px 20px;
+    /* Leicht mehr vertikales Padding */
+    margin: 10px;
+    cursor: pointer;
+
+    /* Typografie */
+    font-size: 1.1rem;
+    /* Leicht größerer Text */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    /* Link-Unterstreichung entfernen */
+
+    /* Aussehen */
+    border: 2px solid transparent;
+    border-radius: 30px;
+    /* Etwas runder */
+    background: linear-gradient(145deg, #3a3a3a, #2b2b2b);
+    /* Dezenter Neumorphismus-Effekt */
+    color: #e0e0e0;
+    box-shadow: 5px 5px 10px #202020,
+        /* Tieferer Schatten */
+        -5px -5px 10px #404040;
+    /* Hellerer Schatten */
+    transition: all 0.2s ease;
+    /* Weiche Übergänge für Interaktion */
+}
+
+#repoLink:focus {
+    border: 2px solid #e69808;
 }
 
 

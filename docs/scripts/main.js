@@ -18,7 +18,7 @@ function toggleMenu() {
         line1.style.transform = 'rotate(0deg)';
         line2.style.opacity = '1';
         line3.style.transform = 'rotate(0deg)';
-        
+
     } else {
         menu.style.display = 'flex';
         menu.style.opacity = '0';
@@ -31,7 +31,7 @@ function toggleMenu() {
         line1.style.transform = 'rotate(45deg) translate(5px, 5px)';
         line2.style.opacity = '0';
         line3.style.transform = 'rotate(-45deg) translate(5px, -5px)';
-        
+
     }
 }
 function closeMenu() {
@@ -53,5 +53,14 @@ function closeMenu() {
     line1.style.transform = 'rotate(0deg)';
     line2.style.opacity = '1';
     line3.style.transform = 'rotate(0deg)';
-    
+
+}
+
+function copyToClipboard() {
+    const repoLink = document.getElementById('repoLink').innerText;
+    navigator.clipboard.writeText(repoLink).then(() => {
+        console.log('Repository link copied to clipboard!');
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
 }

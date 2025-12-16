@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlukoOS - Documentation</title>
+    <title>BlukoOS - Docs</title>
     <link rel="stylesheet" href="styles/main.css">
     <script src="scripts/main.js"></script>
 </head>
 <body>
     <header class="glass-liquid">
         <h1>BlukoOS - Docs</h1>
-         <button class="menu-btn" id="burger" onclick="toggleMenu()">
+        <button class="menu-btn" id="burger" onclick="toggleMenu()">
             <svg class="line-1" id="line1">
                 <rect width="25" height="3"></rect>
             </svg>
@@ -21,21 +21,25 @@
                 <rect width="25" height="3"></rect>
             </svg>
         </button>
-</header>
-<div class="menu-nav" id="menu">
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Blog</a></li>
-    </ul>
-</div>
-<div class="menu-backpanel" id="backpanel" onclick="closeMenu()"></div>
+    </header>
+    <div class="menu-nav" id="menu">
+        <ul>
+            <li><a href="#">Docs</a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul>
+    </div>
+    <div class="menu-backpanel" id="backpanel" onclick="closeMenu()"></div>
     <main>
-        <section>
+        <section class="banner">
             <h2>Getting Started</h2>
-            <p>Learn how to install and set up BlukoOS on your device.</p>
+            <p>Install the Repository and set up BlukoOS on your device.</p>
+            <h4>Clone the Repository from GitHub</h4>
+            <button id="repoLink" onclick="copyToClipboard()">
+                git clone https://github.com/n-km/blukoos.git
+            </button>
         </section>
         <section>
             <h2>User Guide</h2>

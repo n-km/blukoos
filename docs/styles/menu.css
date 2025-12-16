@@ -14,10 +14,12 @@
     border: rgba(0, 0, 0, 0) 2px solid;
     outline: none;
 }
+
 .menu-btn:hover,
 .menu-btn:focus {
     border-color: #e69808;
 }
+
 .menu-btn svg {
     margin: 2px;
     padding: 0px;
@@ -31,7 +33,7 @@
 .menu-nav {
     position: fixed;
     top: 75px;
-    right: -1px; 
+    right: -1px;
     width: 50vw;
     height: calc(100vh - 90px);
     background-color: rgba(255, 255, 255, 0.1);
@@ -52,12 +54,14 @@
     transition: 0.3s;
     padding: 10px;
 }
+
 .menu-nav li {
     list-style: none;
     margin: 0;
     font-weight: bold;
     padding: 18px 20px;
 }
+
 .menu-nav a {
     text-decoration: none;
     color: #e69808;
@@ -65,10 +69,12 @@
     transition: 0.2s;
     float: right;
 }
+
 .menu-nav a:hover,
 .menu-nav a:focus {
     text-decoration: underline;
 }
+
 .menu-backpanel {
     position: fixed;
     top: 0;
