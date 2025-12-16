@@ -9,9 +9,10 @@ CFLAGS  = -m32 -ffreestanding -O2 -Wall -Wextra -Ikernel
 LDFLAGS = -m elf_i386 -T kernel/linker.ld -nostdlib
 
 C_SOURCES   = \
-  kernel/kernel.c \
-  kernel/drivers/video/vga.c \
-  kernel/drivers/input/input.c
+	kernel/kernel.c \
+	kernel/drivers/video/vga.c \
+	kernel/drivers/input/keyboard.c \
+	kernel/console/console.c
 ASM_SOURCES = kernel/arch/x86/boot.s
 
 C_OBJS   = $(C_SOURCES:.c=.o)
