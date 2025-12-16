@@ -2,7 +2,7 @@
 #include "drivers/input/keyboard.h"
 #include "console/console.h"
 
-static void scroll_test(void)
+__attribute__((unused)) static void scroll_test(void)
 {
   vga_write_line("1");
   vga_write_line("2");
@@ -44,14 +44,14 @@ static void scroll_test(void)
   vga_write_line("38");
 }
 
-static void input_test(void)
+__attribute__((unused)) static void input_test(void)
 {
   vga_write("INPUT TESTING: ");
   while (1)
     keyboard_debug_poll_and_print();
 }
 
-static void console_test(void)
+__attribute__((unused)) static void console_test(void)
 {
   console_init();
   while (1)
