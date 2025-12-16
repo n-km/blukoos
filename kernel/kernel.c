@@ -1,5 +1,6 @@
 #include "drivers/video/vga.h"
-#include "drivers/input/input.h"
+#include "drivers/input/keyboard.h"
+#include "console/console.h"
 
 static void scroll_test(void)
 {
@@ -43,16 +44,25 @@ static void scroll_test(void)
   vga_write_line("38");
 }
 
-void input_test(void)
+static void input_test(void)
 {
-  vga_write("> ");
+  vga_write("INPUT TESTING: ");
   while (1)
-    keyboard_poll_and_print();
+    keyboard_debug_poll_and_print();
+}
+
+static void console_test(void)
+{
+  console_init();
+  while (1)
+  {
+    console_tick();
+  }
 }
 
 void kernel_main()
 {
   vga_clear_screen();
 
-  input_test();
+  console_test();
 }

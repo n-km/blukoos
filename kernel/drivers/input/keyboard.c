@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "drivers/video/vga.h"
+#include "drivers/video/vga.h" // Only allowed for debugging; rest is done through console
 #include "arch/x86/io.h"
 
 #define KBD_DATA_PORT 0x60
@@ -152,27 +152,37 @@ static void handle_modifier(uint8_t sc)
     }
 }
 
-void keyboard_poll_and_print(void)
+void keyboard_debug_poll_and_print(void)
 {
     uint8_t sc = kbd_try_read_scancode();
     if (sc == 0)
         return;
 
+    vga_print_hex(sc);
+    vga_write(" ");
+}
+
+int keyboard_try_get_char(char *out)
+{
+    uint8_t sc = kbd_try_read_scancode();
+    if (sc == 0)
+        return 0;
+
     handle_modifier(sc);
 
-    // Key release scancodes are >= 0x80 (press + 0x80). Ignore for now.
+    // ignore releases
     if (sc & 0x80)
-        return;
+        return 0;
 
     uint8_t code = sc & 0x7F;
     if (code >= 128)
-        return;
+        return 0;
 
     char c = shift_down ? scancode_to_ascii_shift[code]
                         : scancode_to_ascii[code];
     if (!c)
-        return;
+        return 0;
 
-    char buf[2] = {c, 0};
-    vga_write(buf);
+    *out = c;
+    return 1;
 }

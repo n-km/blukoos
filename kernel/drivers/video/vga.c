@@ -115,3 +115,33 @@ void vga_clear_screen()
   cursor_offset = get_offset(0, 0);
   set_cursor(cursor_offset);
 }
+
+void vga_putc(char c)
+{
+  char buf[2] = {c, 0};
+  vga_write(buf);
+}
+
+void vga_backspace(void)
+{
+  if (cursor_offset <= 0)
+    return;
+
+  cursor_offset -= 2;
+  set_char_at_video_memory(' ', cursor_offset);
+  set_cursor(cursor_offset);
+}
+
+void vga_print_hex(uint8_t val)
+{
+  const char hex[] = "0123456789ABCDEF";
+
+  char buf[5];
+  buf[0] = '0';
+  buf[1] = 'x';
+  buf[2] = hex[(val >> 4) & 0xF]; // high nibble
+  buf[3] = hex[val & 0xF];        // low nibble
+  buf[4] = 0;
+
+  vga_write(buf);
+}
