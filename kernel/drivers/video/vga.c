@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include "arch/x86/io.h"
 
 /* VGA-Treiber (Textmodus, 0xB8000) */
 #define VIDEO_ADDRESS 0xb8000
@@ -14,18 +15,6 @@
 #define VGA_OFFSET_HIGH 0x0e
 
 static int cursor_offset = 0;
-
-static inline uint8_t port_byte_in(uint16_t port)
-{
-  uint8_t result;
-  __asm__ volatile("inb %1, %0" : "=a"(result) : "Nd"(port));
-  return result;
-}
-
-static inline void port_byte_out(uint16_t port, uint8_t data)
-{
-  __asm__ volatile("outb %0, %1" : : "a"(data), "Nd"(port));
-}
 
 static int get_row_from_offset(int offset) { return offset / (2 * MAX_COLS); }
 
@@ -43,10 +32,10 @@ static void memory_copy(char *source, char *dest, int nbytes)
 static void set_cursor(int offset)
 {
   offset /= 2;
-  port_byte_out(VGA_CTRL_REGISTER, VGA_OFFSET_HIGH);
-  port_byte_out(VGA_DATA_REGISTER, (unsigned char)(offset >> 8));
-  port_byte_out(VGA_CTRL_REGISTER, VGA_OFFSET_LOW);
-  port_byte_out(VGA_DATA_REGISTER, (unsigned char)(offset & 0xff));
+  outb(VGA_CTRL_REGISTER, VGA_OFFSET_HIGH);
+  outb(VGA_DATA_REGISTER, (unsigned char)(offset >> 8));
+  outb(VGA_CTRL_REGISTER, VGA_OFFSET_LOW);
+  outb(VGA_DATA_REGISTER, (unsigned char)(offset & 0xff));
 }
 
 static void set_char_at_video_memory(char character, int offset)

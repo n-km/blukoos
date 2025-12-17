@@ -1,6 +1,8 @@
 #include "drivers/video/vga.h"
 #include "drivers/input/keyboard.h"
 #include "console/console.h"
+#include "console/console_backend.h"
+#include "drivers/video/vga_console_backend.h"
 
 __attribute__((unused)) static void scroll_test(void)
 {
@@ -60,9 +62,17 @@ __attribute__((unused)) static void console_test(void)
   }
 }
 
+__attribute__((unused)) static void console_write_test(void)
+{
+  console_writeln("blukoOS booted");
+  while (1)
+    console_tick();
+}
+
 void kernel_main()
 {
-  vga_clear_screen();
+  console_set_backend(&VGA_CONSOLE_BACKEND);
+  console_init();
 
-  console_test();
+  console_write_test();
 }
