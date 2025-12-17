@@ -1,6 +1,7 @@
 #include "console/console.h"
 #include "drivers/input/keyboard.h"
 #include "console/console_backend.h"
+#include "console/shell/shell.h"
 
 #define LINE_MAX 128
 
@@ -32,9 +33,10 @@ static void prompt(void)
 static void submit_line(void)
 {
     out_s("\n");
-    out_s("You typed: ");
-    out_s(line);
-    out_s("\n");
+    command_execute(line);
+    // out_s("You typed: ");
+    // out_s(line);
+    // out_s("\n");
 
     line_len = 0;
     line[0] = 0;

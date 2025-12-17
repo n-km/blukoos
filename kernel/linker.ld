@@ -20,4 +20,11 @@ SECTIONS {
         *(COMMON)
         *(.bss)
     }
+
+    .commands : {
+        __cmd_start = .;
+        KEEP(*(.commands))
+        __cmd_end = .;
+  }
+
 }

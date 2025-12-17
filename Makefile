@@ -1,3 +1,5 @@
+MAKEFLAGS += --warn-undefined-variables
+
 TARGET  = blukoos
 ISO     = $(TARGET).iso
 
@@ -8,13 +10,10 @@ LD      = ld
 CFLAGS  = -m32 -ffreestanding -O2 -Wall -Wextra -Ikernel
 LDFLAGS = -m elf_i386 -T kernel/linker.ld -nostdlib
 
-C_SOURCES   = \
-	kernel/kernel.c \
-	kernel/drivers/video/vga.c \
-	kernel/drivers/input/keyboard.c \
-	kernel/console/console.c \
-	kernel/drivers/video/vga_console_backend.c
-ASM_SOURCES = kernel/arch/x86/boot.s
+C_SOURCES :=
+ASM_SOURCES := kernel/arch/x86/boot.s
+
+include kernel/Makefile.inc
 
 C_OBJS   = $(C_SOURCES:.c=.o)
 ASM_OBJS = $(ASM_SOURCES:.s=.o)
