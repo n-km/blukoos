@@ -1,12 +1,13 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include "drivers/video/vga.h" // Muss hinzugefügt werden für vga_color_t und vga_entry_color
 
 /* VGA-Treiber (Textmodus, 0xB8000) */
 #define VIDEO_ADDRESS 0xb8000
 #define MAX_ROWS 25
 #define MAX_COLS 80
-#define WHITE_ON_BLACK 0x0f
+#define WHITE_ON_BLACK 0x0f // Wird für Standardausgabe beibehalten
 
 #define VGA_CTRL_REGISTER 0x3d4
 #define VGA_DATA_REGISTER 0x3d5
@@ -49,11 +50,18 @@ static void set_cursor(int offset)
   port_byte_out(VGA_DATA_REGISTER, (unsigned char)(offset & 0xff));
 }
 
-static void set_char_at_video_memory(char character, int offset)
+/* Modifizierte Hilfsfunktion: Fügt das Attribut-Byte als Parameter hinzu */
+static void set_char_at_video_memory_color(char character, int offset, uint8_t color)
 {
   unsigned char *vidmem = (unsigned char *)VIDEO_ADDRESS;
   vidmem[offset] = character;
-  vidmem[offset + 1] = WHITE_ON_BLACK;
+  vidmem[offset + 1] = color;
+}
+
+/* Beibehaltung der alten Funktion, die die Standardfarbe WHITE_ON_BLACK verwendet */
+static void set_char_at_video_memory(char character, int offset)
+{
+  set_char_at_video_memory_color(character, offset, WHITE_ON_BLACK);
 }
 
 static int scroll_ln(int offset)
@@ -62,6 +70,7 @@ static int scroll_ln(int offset)
               (char *)(get_offset(0, 0) + VIDEO_ADDRESS),
               MAX_COLS * (MAX_ROWS - 1) * 2);
 
+  // Verwendet die alte set_char_at_video_memory, die WHITE_ON_BLACK setzt
   for (int col = 0; col < MAX_COLS; col++)
   {
     set_char_at_video_memory(' ', get_offset(col, MAX_ROWS - 1));
@@ -75,7 +84,7 @@ static int move_offset_to_new_line(int offset)
   return get_offset(0, get_row_from_offset(offset) + 1);
 }
 
-void vga_write(char *string)
+void vga_write(const char *string)
 {
   int offset = cursor_offset;
   int i = 0;
@@ -100,7 +109,7 @@ void vga_write(char *string)
   set_cursor(offset);
 }
 
-void vga_write_line(char *string)
+void vga_write_line(const char *string)
 {
   vga_write(string);
   vga_write("\n");
@@ -110,6 +119,7 @@ void vga_clear_screen()
 {
   for (int i = 0; i < MAX_COLS * MAX_ROWS; ++i)
   {
+    // Verwendet die alte set_char_at_video_memory, die WHITE_ON_BLACK setzt
     set_char_at_video_memory(' ', i * 2);
   }
   cursor_offset = get_offset(0, 0);
@@ -139,9 +149,33 @@ void vga_print_hex(uint8_t val)
   char buf[5];
   buf[0] = '0';
   buf[1] = 'x';
-  buf[2] = hex[(val >> 4) & 0xF]; // high nibble
-  buf[3] = hex[val & 0xF];        // low nibble
+  buf[2] = hex[(val >> 4) & 0xF];
+  buf[3] = hex[val & 0xF];
   buf[4] = 0;
 
   vga_write(buf);
+}
+
+/* NEUE FUNKTION: write_line_color */
+void write_line_color(size_t row, const char* str, size_t len, vga_color_t fg, vga_color_t bg) {
+    if (row >= MAX_ROWS) {
+        return;
+    }
+    
+    // Annahme: vga_entry_color ist in vga.h definiert
+    uint8_t color_byte = vga_entry_color(fg, bg);
+    
+    int offset = get_offset(0, row);
+    
+    size_t i;
+    for (i = 0; i < len && i < MAX_COLS; i++) {
+        set_char_at_video_memory_color(str[i], offset, color_byte);
+        offset += 2;
+    }
+    
+    // Rest der Zeile mit Hintergrundfarbe füllen
+    for (; i < MAX_COLS; i++) {
+        set_char_at_video_memory_color(' ', offset, color_byte);
+        offset += 2;
+    }
 }

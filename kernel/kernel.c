@@ -1,6 +1,7 @@
 #include "drivers/video/vga.h"
 #include "drivers/input/keyboard.h"
 #include "console/console.h"
+#include "lib/string.h"
 
 __attribute__((unused)) static void scroll_test(void)
 {
@@ -42,6 +43,7 @@ __attribute__((unused)) static void scroll_test(void)
   vga_write_line("36");
   vga_write_line("37");
   vga_write_line("38");
+  
 }
 
 __attribute__((unused)) static void input_test(void)
@@ -60,9 +62,24 @@ __attribute__((unused)) static void console_test(void)
   }
 }
 
+// color test
+static void color_test(void)
+{
+  const char* str = "Hello World";
+    write_line_color(
+        0, // Zeile 38 ist eigentlich Index 37, da die Zählung bei 0 beginnt
+        str, 
+        strlen(str), 
+        VGA_COLOR_RED, 
+        VGA_COLOR_BLACK
+    );
+}
+
 void kernel_main()
 {
   vga_clear_screen();
 
-  console_test();
+  color_test();
+
+  // console_test();
 }

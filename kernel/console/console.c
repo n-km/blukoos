@@ -1,8 +1,10 @@
 #include "console/console.h"
 #include "drivers/video/vga.h"
 #include "drivers/input/keyboard.h"
+#include <stddef.h>
 
 #define LINE_MAX 128
+#define PROMPT_ROW (VGA_HEIGHT - 1) // Annahme: Letzte Zeile für Eingabe
 
 static char line[LINE_MAX];
 static int line_len = 0;
@@ -10,6 +12,7 @@ static int line_len = 0;
 static void prompt(void)
 {
     vga_write("> ");
+    vga_write(line);
 }
 
 static void submit_line(void)
@@ -67,4 +70,10 @@ void console_tick(void)
     {
         push_char(c);
     }
+}
+
+void console_write_line_color(size_t row, const char* str, size_t len, vga_color_t fg, vga_color_t bg)
+{
+    write_line_color(row, str, len, fg, bg);
+    prompt(); // Prompt neu zeichnen, um die aktuelle Eingabezeile wiederherzustellen
 }
